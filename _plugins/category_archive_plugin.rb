@@ -69,12 +69,12 @@ module Jekyll
       payload = {
           'page' => self.to_liquid,
           'paginator' => pager.to_liquid
-      }.deep_merge(site_payload)
+      }.merge(site_payload)
       do_layout(payload, layouts)
     end
 
     def to_liquid(attr = nil)
-      self.data.deep_merge({
+      self.data.merge({
                                'content' => self.content,
                                'category' => @category
                            })
