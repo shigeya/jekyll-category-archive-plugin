@@ -35,6 +35,17 @@ the archive for. Default is null string.
 
 `page.category` contains the category name.
 
+# Linking to a category archive
+
+This plugin provides the custom liquid block tag, `categorylink`, which can be used to render a
+link to a category's archive. For example:
+
+```
+{% categorylink foo %}This is a link to foo{% endcategorylink %}
+```
+
+Would create a link to the category archive of `foo` with the content "This is a link to foo".
+
 
 # Copyright
 
