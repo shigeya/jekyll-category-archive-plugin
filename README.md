@@ -44,7 +44,9 @@ link to a category's archive. For example:
 {% categorylink foo %}This is a link to foo{% endcategorylink %}
 ```
 
-Would create a link to the category archive of `foo` with the content "This is a link to foo".
+Would create a link to the category archive of `foo` with the content "This is a link to foo". In
+addition, if the name of a variable is specified instead of a category, the variable will be
+expanded every time the tag block is rendered.
 
 
 # Copyright

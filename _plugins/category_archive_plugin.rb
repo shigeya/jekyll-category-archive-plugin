@@ -47,8 +47,15 @@ module Jekyll
     end
 
     def render(context)
+      # If the category is a variable in the current context, expand it
+      if context.has_key?(@category)
+	      category = context[@category]
+      else
+	      category = @category
+      end
+
       href = File.join('/', context.environments.first['site']['category_archive']['path'],
-                       @category, 'index.html')
+                       category, 'index.html')
       "<a href=\"#{href}\">#{super}</a>"
     end
   end
