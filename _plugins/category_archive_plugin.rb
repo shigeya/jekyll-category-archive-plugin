@@ -38,6 +38,28 @@ module Jekyll
     end
   end
 
+  # Tag for generating a link to a category archive page
+  class CategoryArchiveLinkTag < Liquid::Block
+
+    def initialize(tag_name, category, tokens)
+      super
+      @category = category.split(' ').first || category
+    end
+
+    def render(context)
+      # If the category is a variable in the current context, expand it
+      if context.has_key?(@category)
+	      category = context[@category]
+      else
+	      category = @category
+      end
+
+      href = File.join('/', context.environments.first['site']['category_archive']['path'],
+                       category, 'index.html')
+      "<a href=\"#{href}\">#{super}</a>"
+    end
+  end
+
   # Actual page instances
   class CategoryArchivePage < Page
     ATTRIBUTES_FOR_LIQUID = %w[
@@ -86,6 +108,8 @@ module Jekyll
 
   end
 end
+
+Liquid::Template.register_tag('categorylink', Jekyll::CategoryArchiveLinkTag)
 
 # The MIT License (MIT)
 #
