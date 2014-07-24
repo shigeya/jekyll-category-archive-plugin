@@ -83,7 +83,10 @@ module Jekyll
           'layout' => @layout,
           'type' => 'archive',
           'title' => "Category archive for #{@category}",
-          'posts' => posts
+          'posts' => posts,
+          'url' => File.join('/',
+                     site.config['category_archive']['path'],
+                     @category_dir_name, 'index.html')
       }
     end
 
