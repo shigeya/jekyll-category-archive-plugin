@@ -19,11 +19,17 @@
 
 module Jekyll
 
+  module CategoryArchiveUtil
+    def self.archive_base(site)
+      site.config['category_archive'] && site.config['category_archive']['path'] || ''
+    end
+  end
+
   # Generator class invoked from Jekyll
   class CategoryArchiveGenerator < Generator
     def generate(site)
       posts_group_by_category(site).each do |category, list|
-        site.pages << CategoryArchivePage.new(site, archive_base(site), category, list)
+        site.pages << CategoryArchivePage.new(site, CategoryArchiveUtil.archive_base(site), category, list)
       end
     end
 
@@ -31,10 +37,6 @@ module Jekyll
       category_map = {}
       site.posts.each {|p| p.categories.each {|c| (category_map[c] ||= []) << p } }
       category_map
-    end
-
-    def archive_base(site)
-      site.config['category_archive'] && site.config['category_archive']['path'] || ''
     end
   end
 
@@ -85,7 +87,7 @@ module Jekyll
           'title' => "Category archive for #{@category}",
           'posts' => posts,
           'url' => File.join('/',
-                     site.config['category_archive']['path'],
+                     CategoryArchiveUtil.archive_base(site),
                      @category_dir_name, 'index.html')
       }
     end
