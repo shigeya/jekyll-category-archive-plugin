@@ -30,6 +30,9 @@ site configuration. If specified, archive will be generated in
 `PATH/CATEGORY/index.html`, where `PATH` is substituted by `path`, `CATEGORY` is the category
 the archive for. Default is null string.
 
+If the `slugify` key is set to `true`, then category URLs will be slugified.
+ie: the url for "My Category" will be 'categories/my-category' not
+'categories/My%20Category'
 
 # Liquid variables for template
 
