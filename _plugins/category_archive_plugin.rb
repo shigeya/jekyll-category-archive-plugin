@@ -56,6 +56,11 @@ module Jekyll
 	      category = @category
       end
 
+
+      if context.registers[:site].config['category_archive']['slugify']
+        category = Utils.slugify(category)
+      end
+
       href = File.join('/', context.environments.first['site']['category_archive']['path'],
                        category, 'index.html')
       "<a href=\"#{href}\">#{super}</a>"
@@ -73,7 +78,13 @@ module Jekyll
       @site = site
       @dir = dir
       @category = category
-      @category_dir_name = @category # require sanitize here
+
+      if site.config['category_archive']['slugify']
+        @category_dir_name = Utils.slugify(@category) # require sanitize here
+      else 
+        @category_dir_name = @category
+      end
+
       @layout =  site.config['category_archive'] && site.config['category_archive']['layout'] || 'category_archive'
       self.ext = '.html'
       self.basename = 'index'
