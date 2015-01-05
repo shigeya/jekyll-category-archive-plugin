@@ -57,7 +57,7 @@ module Jekyll
       end
 
 
-      if context.registers[:site].config['category_archive']['slugify']
+      if context.registers[:site].config['category_archive'] && context.registers[:site].config['category_archive']['slugify']
         category = Utils.slugify(category)
       end
 
@@ -79,7 +79,7 @@ module Jekyll
       @dir = dir
       @category = category
 
-      if site.config['category_archive']['slugify']
+      if site.config['category_archive'] && site.config['category_archive']['slugify']
         @category_dir_name = Utils.slugify(@category) # require sanitize here
       else 
         @category_dir_name = @category
