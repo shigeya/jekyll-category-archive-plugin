@@ -61,7 +61,7 @@ module Jekyll
         category = Utils.slugify(category)
       end
 
-      href = File.join('/', context.environments.first['site']['category_archive']['path'],
+      href = File.join('/', context.registers[:site].baseurl, context.environments.first['site']['category_archive']['path'],
                        category, 'index.html')
       "<a href=\"#{href}\">#{super}</a>"
     end
